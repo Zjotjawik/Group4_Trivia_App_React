@@ -104,8 +104,8 @@ const Quiz = ({ questions }) => {
        <button onClick={onTryAgain}>Try again</button>
     </div>
  )}
-
-{
+ 
+ {
                   <div className="made-by">
                   <p>Made by Ben & Jerry</p>
               </div>    
