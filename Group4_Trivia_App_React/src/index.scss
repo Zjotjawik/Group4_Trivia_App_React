@@ -1,0 +1,236 @@
+$primary: #000000;
+$accent: #8e4e00;
+$bg: #f5f5f5;
+$bg-accent:#e7e8e9;
+$disabled: #000000;
+$foreground: #000000;
+
+// Background animation
+@mixin dots($count) {
+  $text-shadow: ();
+  @for $i from 0 through $count {
+    $text-shadow: $text-shadow,
+                 (-.5+(random()) * 1) + em
+                 (-.5+(random()) * 1) + em
+                 7px
+                 hsla(random() * 360, 100%, 50%,.9);
+  }
+  text-shadow: $text-shadow;
+}
+
+html {
+  font: 5vmin/1.3 Serif;
+  overflow: hidden;
+  background: rgb(110, 110, 110);
+}
+
+head::before, head::after,
+body::before, body::after {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 3em;
+  height: 3em;
+  content: '.';
+  mix-blend-mode: screen;
+  animation: 44s -27s move infinite ease-in-out alternate;
+  z-index: -1; // add this line
+}
+
+
+body::before {
+  @include dots(40);
+  animation-duration: 44s;
+  animation-delay: -27s;
+}
+
+body::after {
+  @include dots(40);
+  animation-duration: 43s;
+  animation-delay: -32s;
+}
+
+@keyframes move {
+  from {
+    transform: rotate(0deg) scale(12) translateX(-20px);
+  }
+  to {
+    transform: rotate(360deg) scale(18) translateX(20px);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  border: 16px solid $bg;
+  border-top: 16px solid $primary;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+
+body {
+    font-family: monospace;
+    color: #2d264b;
+    display:flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 30px;
+    height: 100vh;
+    transition: all 0.3s ease;
+
+}
+
+.quiz-container {
+    position: relative;
+    background: $bg;
+    border-radius: 13px;
+    padding: 30px 60px;
+    margin-top: 100px;
+    box-sizing: border-box;
+    overflow: visible; /* change this to 'visible' or 'auto' */
+    width: 540px;
+    padding: 40px 30px 70px;
+    transition: all 0.3s ease;
+    color: rgb(255, 255, 255);
+    backdrop-filter: blur(10px);
+    background-blend-mode: overlay;
+    background-color: rgba(255, 255, 255, 0.39);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.269),
+    inset 0 0 0 2px rgba(0, 0, 0, 0);
+    transition: all 0.3s ease;
+
+    @media (max-width: 600px) {
+      width: 100%; // Use full width on small screens
+      padding: 20px; // Reduce padding on small screens
+  }
+}
+
+    .active-question-no {
+        font-size: 32px;
+        font-weight: 500;
+        color: $primary;
+    transition: all 0.3s ease;
+
+    }
+    .total-question {
+        font-size: 16px;
+        font-weight: 500;
+        color: $disabled
+    }
+
+    h2 {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0;
+
+    }
+    ul {
+        margin-top: 20px;
+        margin-left: -40px;
+        transition: all 0.3s ease;
+
+        li {
+            text-decoration: none;
+            list-style: none;
+            color: $foreground;
+            font-size: 16px;
+            padding: 11px;
+            border: 1px solid $disabled;            
+            border-radius: 13px;
+            margin-top: 15px;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.269),
+                        inset 0 0 0 2px rgba(92, 92, 92, 0);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background-blend-mode: overlay;
+            background-color: rgba(255, 255, 255, 0.39);
+            transition: all 0.3s ease;
+
+            }
+            .selected-answer {
+                background: $primary;
+                border: 1px solid $accent;
+                color: $bg;
+                transition: all 0.3s ease;
+
+            }
+            }
+            .footer {
+                display:flex;
+                justify-content: flex-end;
+            }
+            
+            button {
+                cursor: pointer;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(5px);
+                background-blend-mode: overlay;
+                background-color: rgba(255, 255, 255, 0);
+                color: $foreground;
+                font-size: 16px;
+                border: none;
+                border-radius: 13px;
+                padding: 10px 42px;
+                outline: none;
+                margin-top: 15px;
+                transition: all 0.3s ease;
+              
+
+                &:disabled {
+                    background: $bg;
+                    color: $disabled;
+                    cursor: not-allowed;
+        }
+        }
+
+        .result{
+            text-align: center;
+
+            h3 {
+                font-size: 24px;
+                letter-spacing: 1.4px;
+                text-align: center;
+            }
+            p {
+                font-size: 16px;
+                font-weight: 500;
+
+                span{
+                    color: $primary;
+                    font-size: 32px;
+
+                }
+            }
+        }
+    
+    .made-by {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 10px 30px;
+        font-size: 12px;
+        font-weight: 500;
+        a { //for link?
+            color: $primary;
+            text-decoration: none;
+        }
+        @media (max-width: 600px) {
+        position:initial      
+        
+        
+    }
+
+
+    button:hover {
+      background-color: $bg-accent;
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+  }
+}
