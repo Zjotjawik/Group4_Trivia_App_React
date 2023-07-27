@@ -10,6 +10,8 @@ import correctSound from '../src/assets/644955__craigscottuk__quiz-gameshow-corr
 import soundLoop from '../src/assets/220060__portwain__quiz-game-music-loop-bpm-90.wav';
 import applauseSound from '../src/assets/18665__halleck__cheering-16.flac';
 import errorSound from '../src/assets/650842__andreas__wrong-answer-buzzer.wav';
+import nextSound from '../src/assets/146434__copyc4t__dundundunnn.wav';
+
 
 // Define a functional component called Quiz, which takes an array of questions as a prop
 
@@ -27,16 +29,14 @@ const Quiz = () => {
   const [playCorrect] = useSound(correctSound);
   const [playError] = useSound(errorSound);
 
-  const [play] = useSound(correctSound, { volume: 1 });
-
   const [playLoop] = useSound(soundLoop, {
-   volume: 0.3, 
+   volume: 0.2, 
    loop: true  
  });
 
  const [playApplause] = useSound(applauseSound);
  
-
+ const [playNext] = useSound(nextSound);
   
   const[onClickNextTrue, setOnClickNextTrue] = useState(false)
 
@@ -139,7 +139,6 @@ const Quiz = () => {
         setQuestions(res.data)
       })
       .catch(err => console.log(err))
-      playLoop();
   }
 
   // Destructure the current question object
@@ -156,7 +155,8 @@ const Quiz = () => {
     } else {
       playError(); 
     }
-    
+    playLoop();
+
   };
 
   const inputUserAnswer = (answer,entireObjOfTheQuestion) => {
@@ -179,6 +179,7 @@ const Quiz = () => {
     
     setAnswerIdx(null);
 
+    playNext(); 
     // Use the updater function form of setState. It takes the previous state and returns the new state.
     // Update the score and increment correct or wrong answer count based on the selected answer
     setResult((prev) => 
