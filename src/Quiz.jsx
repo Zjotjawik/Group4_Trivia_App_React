@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"; // Import useState hook from React library. This hook lets you add React state to function components.
 // import { resultInitialState} from './constants'; // Import initial state for quiz results.
 import axios from 'axios'
+import useSound from 'use-sound';
+import sound1 from '../src/assets/644955__craigscottuk__quiz-gameshow-correct-ping-08.mp3'; 
 
 // Define a functional component called Quiz, which takes an array of questions as a prop
 // const Quiz = ({ questions }) => {
@@ -10,6 +12,8 @@ const Quiz = () => {
     const [answerIdx, setAnswerIdx] = useState(null); // Index of the selected answer
     const [answer, setAnswer] = useState(null); // The correctness of the selected answer
     const [showResult, setShowResult] = useState(false); // Boolean to toggle between quiz and result display
+    const [play] = useSound(sound1, { volume: 0.2 });
+
     const [resultInitialState, setResultInitialState] = useState({
        score: 0,
        correctAnswers: 0, 
@@ -91,6 +95,8 @@ const Quiz = () => {
         } else {
             setAnswer(false);
         }
+            play(); // Play the sound
+
     };
 
     // Define the function to call when the Next button is clicked. It updates the result and the current question
