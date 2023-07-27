@@ -237,3 +237,27 @@ body {
       transition: all 0.3s ease;
   }
 }
+
+
+h3.results-page, p.results-page {
+  font-size: 18px;
+  position: relative;
+  background: $bg;
+  border-radius: 13px;
+  box-sizing: border-box;
+  overflow: visible; /* change this to 'visible' or 'auto' */
+  color: black;
+  backdrop-filter: blur(10px);
+  background-blend-mode: overlay;
+  background-color: rgba(255, 255, 255, 0.39);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.269),
+  inset 0 0 0 2px rgba(0, 0, 0, 0);
+  }
+
+
+
+@media screen and (max-device-width: 480px){
+  h3.results-page, li.results-page {
+    -webkit-text-size-adjust: 100%;
+  }
+}

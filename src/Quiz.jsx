@@ -192,15 +192,15 @@ const Quiz = () => {
           Wrong Answers: <span>{result.wrongAnswers} </span>
        </p>
        <button onClick={onTryAgain}>Try again</button>
-    </div>
-    {questions ? questions.map(ele => {
-      return (
-         <div className="result">
-               <h3>{ele.question}</h3>
-               <p>{ele.correctAnswer}</p>
-               <p>{ele.userAnswer}</p>
-         </div>
-      )
+       </div>
+  {questions ? questions.map(ele => {
+    return (
+      <div className="result">
+        <h3 className="results-page">{ele.question}</h3> 
+        <p className="results-page">{ele.correctAnswer}</p> 
+        <p className="results-page">{ele.userAnswer}</p> 
+      </div>
+    )
     }) : <p>LOADING</p>}
    </>
  )}
