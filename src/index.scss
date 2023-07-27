@@ -25,6 +25,8 @@ html {
   font: 5vmin/1.3 Serif;
   overflow: hidden;
   background: rgb(110, 110, 110);
+  overflow-y: scroll;
+
 }
 
 head::before, head::after,
@@ -261,3 +263,16 @@ h3.results-page, p.results-page {
     -webkit-text-size-adjust: 100%;
   }
 }
+
+/* Correct answer */ 
+h3.correct {
+  color: green;
+  font-size: 14px; 
+}
+
+/* Incorrect answer */
+h3.incorrect {
+  color: red;
+  font-size: 14px;
+}
+
