@@ -79,19 +79,30 @@ const Quiz = () => {
    }
 
     // Destructure the current question object
-    const { question, answers, correctAnswer } = questions[currentQuestion];
+    const { question, answers, userAnswer, correctAnswer } = questions[currentQuestion];
 
     // Define the function to call when an answer is clicked. It updates the selected answer and its correctness
-    const onAnswerClick = (answer, index) => {
+    const onAnswerClick = (answer, index, entireObjOfTheQuestion) => {
+        inputUserAnswer(answer, entireObjOfTheQuestion)
         setAnswerIdx(index);
-        console.log(questions[index])
-        console.log(answer)
         if(answer === correctAnswer) {
             setAnswer(true);
         } else {
             setAnswer(false);
         }
     };
+
+    const inputUserAnswer = (answer,entireObjOfTheQuestion) => {
+      // find the entireObjOfTheQuestion inside of the questions array and update the userAnswer
+      let updatedQuestions = questions.map(item => 
+         {
+            if (item.id == entireObjOfTheQuestion.id){
+            return {...item, userAnswer: answer}; //gets everything that was already in item, and updates "done"
+            }
+            return item; // else return unmodified item 
+         });
+      setQuestions(updatedQuestions)
+    }
 
     // Define the function to call when the Next button is clicked. It updates the result and the current question
     const onClickNext = () => {
@@ -139,10 +150,11 @@ const Quiz = () => {
        <span className="active-question-no"> {currentQuestion +1}</span>
        <span className="total=question">/{questions.length}</span>
        <h2>{question} </h2>
+       {userAnswer != '' ? userAnswer == correctAnswer ? <h3>CORRECT!</h3> : <h3>INCORRECT!</h3> : ''}
        <ul>
           {answers.map((choice, index) => (
              <li 
-                onClick={() => onAnswerClick(choice, index)}
+                onClick={() => onAnswerClick(choice, index, questions[currentQuestion])}
                 key={choice}
                 className={answerIdx === index ? "selected-answer" : null}
              >
@@ -157,6 +169,8 @@ const Quiz = () => {
        </div>
     </>
  ) : (
+   <>
+
     <div className="result">
        <h3>Result</h3>
        <p>
@@ -173,6 +187,16 @@ const Quiz = () => {
        </p>
        <button onClick={onTryAgain}>Try again</button>
     </div>
+    {questions ? questions.map(ele => {
+      return (
+         <div className="result">
+               <h3>{ele.question}</h3>
+               <p>{ele.correctAnswer}</p>
+               <p>{ele.userAnswer}</p>
+         </div>
+      )
+    }) : <p>LOADING</p>}
+   </>
  )}
 
 {
