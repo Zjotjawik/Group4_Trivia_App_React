@@ -13,6 +13,7 @@ const Quiz = () => {
     const [answer, setAnswer] = useState(null); // The correctness of the selected answer
     const [showResult, setShowResult] = useState(false); // Boolean to toggle between quiz and result display
     const [play] = useSound(sound1, { volume: 0.2 });
+    const[onClickNextTrue, setOnClickNextTrue] = useState(false)
 
     const [resultInitialState, setResultInitialState] = useState({
        score: 0,
@@ -113,8 +114,8 @@ const Quiz = () => {
     // Define the function to call when the Next button is clicked. It updates the result and the current question
     const onClickNext = () => {
         // Set selected answer to null for the next question
+        setOnClickNextTrue(true); //sets onClickNextTrue to true right when the onClickNext button has been clicked.
         setAnswerIdx(null);
-
         // Use the updater function form of setState. It takes the previous state and returns the new state.
         // Update the score and increment correct or wrong answer count based on the selected answer
         setResult((prev) => 
@@ -129,13 +130,14 @@ const Quiz = () => {
                 wrongAnswers: prev.wrongAnswers +1,          
             }
         );
-
         // If it's not the last question, go to the next one. Otherwise, show results
         if(currentQuestion !== questions.length -1) {
             setCurrentQuestion((prev) => prev + 1);
+            setOnClickNextTrue(false); // sets the setOnClickNext to false again.
         } else {
             setCurrentQuestion(0);
             setShowResult(true);
+            setOnClickNextTrue(false);
         }
     };
 
@@ -156,7 +158,7 @@ const Quiz = () => {
        <span className="active-question-no"> {currentQuestion +1}</span>
        <span className="total=question">/{questions.length}</span>
        <h2>{question} </h2>
-       {userAnswer != '' ? userAnswer == correctAnswer ? <h3>CORRECT!</h3> : <h3>INCORRECT!</h3> : ''}
+       {userAnswer != '' ? userAnswer == correctAnswer ? <h3>CORRECT!</h3> : <h3>INCORRECT!</h3> : ''}       
        <ul>
           {answers.map((choice, index) => (
              <li 
@@ -214,3 +216,34 @@ const Quiz = () => {
       );
       };
 export default Quiz;
+
+
+
+
+
+
+
+//added code on lines : 16, 117, 136, 140 
+// defined a new useState called "onClickNextTrue", initialized with "false", to check if nextbutton is clicked or not. added setters
+// to the onNextClick function to set the "onClickNextTrue" state to true so the <h3> with "Correct" or "Incorrect" shows.
+/* line 161 should be replaced by something like:
+{if(userAnswer != '' && userAnswer == correctAnswer && onClickNext == true) {
+   return( 
+   <>
+   <h3>CORRECT!</h3>
+   </>
+   )
+}
+else if(userAnswer != '' && userAnswer != correctAnswer && onClickNext == true){
+   return(
+      <>
+      <h3>INCORRECT!</h3>
+      </>
+   )
+}
+else {
+   return '';
+}
+}
+
+*/
