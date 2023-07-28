@@ -34,10 +34,11 @@ const Quiz = () => {
    loop: true  
  });
 
+ 
  const [playApplause] = useSound(applauseSound);
  
- const [playNext] = useSound(nextSound);
-  
+ const [playNext] = useSound(nextSound, {volume: 0.2});
+
   const[onClickNextTrue, setOnClickNextTrue] = useState(false)
 
   const [resultInitialState, setResultInitialState] = useState({
@@ -130,7 +131,6 @@ const Quiz = () => {
     getQuestions()
   }, [])
 
- 
 
 
   const getQuestions = () => {
