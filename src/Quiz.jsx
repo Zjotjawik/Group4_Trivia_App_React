@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import useSound from 'use-sound';
 import correctSound from '../src/assets/644955__craigscottuk__quiz-gameshow-correct-ping-08.mp3';
-import soundLoop from '../src/assets/220060__portwain__quiz-game-music-loop-bpm-90.wav';
 import applauseSound from '../src/assets/18665__halleck__cheering-16.flac';
 import errorSound from '../src/assets/650842__andreas__wrong-answer-buzzer.wav';
 import nextSound from '../src/assets/146434__copyc4t__dundundunnn.wav';
@@ -155,7 +154,6 @@ const Quiz = () => {
     } else {
       playError(); 
     }
-    playLoop();
 
   };
 
