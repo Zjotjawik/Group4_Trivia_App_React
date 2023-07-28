@@ -27,16 +27,10 @@ const Quiz = () => {
 
   const [playCorrect] = useSound(correctSound);
   const [playError] = useSound(errorSound);
-
-  const [playLoop] = useSound(soundLoop, {
-   volume: 0.2, 
-   loop: true  
- });
-
  
  const [playApplause] = useSound(applauseSound);
  
- const [playNext] = useSound(nextSound, {volume: 0.2});
+ const [playNext] = useSound(nextSound, {volume: 0.1});
 
   const[onClickNextTrue, setOnClickNextTrue] = useState(false)
 
@@ -154,7 +148,6 @@ const Quiz = () => {
     } else {
       playError(); 
     }
-
   };
 
   const inputUserAnswer = (answer,entireObjOfTheQuestion) => {
